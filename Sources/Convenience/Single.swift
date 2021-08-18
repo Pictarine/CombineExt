@@ -17,13 +17,6 @@ import Combine
 public protocol SinglePublisher: Publisher {
 }
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public extension SinglePublisher {
-  func eraseToAnySinglePublisher() -> AnySinglePublisher<Output, Failure> {
-    AnySinglePublisher(self)
-  }
-}
-
 // ========================================================================
 // MARK: AnySinglePublisher for type-erasure
 // ========================================================================
@@ -70,18 +63,15 @@ extension DeferredFuture: SinglePublisher {
 }
 
 // ========================================================================
-// MARK: Just protocol conformance
-// ========================================================================
-
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Just: SinglePublisher {}
-
-// ========================================================================
 // MARK: First stream value conformance
 // ========================================================================
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Publishers.First: SinglePublisher {}
+extension Publishers.First: SinglePublisher {
+  internal func toAnySinglePublisher() -> AnySinglePublisher<Output, Failure> {
+    AnySinglePublisher(self)
+  }
+}
 
 // ========================================================================
 // MARK: PassthroughSubject convenience converters
@@ -90,7 +80,18 @@ extension Publishers.First: SinglePublisher {}
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public extension PassthroughSubject {
   func nextSingleValue() -> AnySinglePublisher<Output, Failure> {
-    first().eraseToAnySinglePublisher()
+    eraseToAnySinglePublisher()
+  }
+}
+
+// ========================================================================
+// MARK: Publishers utilities
+// ========================================================================
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension Publisher {
+  func eraseToAnySinglePublisher() -> AnySinglePublisher<Output, Failure> {
+    first().toAnySinglePublisher()
   }
 }
 #endif
