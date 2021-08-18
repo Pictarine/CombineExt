@@ -21,17 +21,25 @@ import class Foundation.NSRecursiveLock
 /// the entire behavior and backpressure contract
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 class DemandBuffer<S: Subscriber> {
+    public typealias DidReceiveValueWhenCompleted = (S.Input, Subscribers.Completion<S.Failure>, [String]) -> Void
+
     private let lock = NSRecursiveLock()
     private var buffer = [S.Input]()
     private let subscriber: S
     private var completion: Subscribers.Completion<S.Failure>?
     private var demandState = Demand()
+    private var didReceiveValueWhenCompleted: DidReceiveValueWhenCompleted?
+    private var completionStackTrace: [String] = []
 
     /// Initialize a new demand buffer for a provided downstream subscriber
     ///
     /// - parameter subscriber: The downstream subscriber demanding events
-    init(subscriber: S) {
+    init(
+        subscriber: S,
+        didReceiveValueWhenCompleted: DidReceiveValueWhenCompleted? = .none
+    ) {
         self.subscriber = subscriber
+        self.didReceiveValueWhenCompleted = didReceiveValueWhenCompleted
     }
 
     /// Buffer an upstream value to later be forwarded to
@@ -41,8 +49,13 @@ class DemandBuffer<S: Subscriber> {
     ///
     /// - returns: The demand fulfilled by the bufferr
     func buffer(value: S.Input) -> Subscribers.Demand {
-        precondition(self.completion == nil,
-                     "How could a completed publisher sent values?! Beats me 🤷‍♂️")
+        if let completion = self.completion {
+            // NOTE: Here we call this completion for debugging purpose, and remove the original
+            // precondition failure to just return and avoid app crash.
+            didReceiveValueWhenCompleted?(value, completion, completionStackTrace)
+            return .none
+        }
+
         lock.lock()
         defer { lock.unlock() }
 
