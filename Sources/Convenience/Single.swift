@@ -58,7 +58,7 @@ public typealias DeferredFuture<Output, Failure: Swift.Error> = Deferred<Future<
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension DeferredFuture: SinglePublisher {
-  public typealias Builder = ((Result<Output, Failure>) -> Void) -> Void
+  public typealias Builder = (@escaping (Result<Output, Failure>) -> Void) -> Void
 
   public static func create<Output, Failure>(
     _ builder: @escaping DeferredFuture<Output, Failure>.Builder

@@ -41,6 +41,7 @@
 		DCFAD51326CD20F900AEC5B8 /* AnyPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFAD51226CD20F900AEC5B8 /* AnyPublisher.swift */; };
 		DCFAD51526CD226000AEC5B8 /* CombineDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFAD51426CD226000AEC5B8 /* CombineDictionary.swift */; };
 		DCFAD51C26CD2EA100AEC5B8 /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFAD51B26CD2EA100AEC5B8 /* Single.swift */; };
+		DCFAD51E26CD564000AEC5B8 /* MapTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFAD51D26CD564000AEC5B8 /* MapTo.swift */; };
 		OBJ_100 /* ZipMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* ZipMany.swift */; };
 		OBJ_101 /* CurrentValueRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* CurrentValueRelay.swift */; };
 		OBJ_102 /* PassthroughRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* PassthroughRelay.swift */; };
@@ -130,6 +131,7 @@
 		DCFAD51226CD20F900AEC5B8 /* AnyPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPublisher.swift; sourceTree = "<group>"; };
 		DCFAD51426CD226000AEC5B8 /* CombineDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineDictionary.swift; sourceTree = "<group>"; };
 		DCFAD51B26CD2EA100AEC5B8 /* Single.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
+		DCFAD51D26CD564000AEC5B8 /* MapTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTo.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Sink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sink.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				BF3D3B5C253B83F300D830ED /* IgnoreFailure.swift */,
 				BF43CC1425008B4F005AFA28 /* IgnoreOutputSetOutputType.swift */,
 				OBJ_24 /* MapMany.swift */,
+				DCFAD51D26CD564000AEC5B8 /* MapTo.swift */,
 				OBJ_25 /* Materialize.swift */,
 				D836234724EA9446002353AC /* MergeMany.swift */,
 				C387777B24E6BBE900FAD2D8 /* Nwise.swift */,
@@ -613,6 +616,7 @@
 				1970A8AA25246FBD00799AB6 /* FilterMany.swift in Sources */,
 				OBJ_92 /* Materialize.swift in Sources */,
 				D836234824EA9446002353AC /* MergeMany.swift in Sources */,
+				DCFAD51E26CD564000AEC5B8 /* MapTo.swift in Sources */,
 				BF43CC1525008B4F005AFA28 /* IgnoreOutputSetOutputType.swift in Sources */,
 				OBJ_93 /* Partition.swift in Sources */,
 				OBJ_94 /* PrefixDuration.swift in Sources */,
