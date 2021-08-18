@@ -75,4 +75,22 @@ extension DeferredFuture: SinglePublisher {
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Just: SinglePublisher {}
+
+// ========================================================================
+// MARK: First stream value conformance
+// ========================================================================
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension Publishers.First: SinglePublisher {}
+
+// ========================================================================
+// MARK: PassthroughSubject convenience converters
+// ========================================================================
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension PassthroughSubject {
+  func nextSingleValue() -> AnySinglePublisher<Output, Failure> {
+    first().eraseToAnySinglePublisher()
+  }
+}
 #endif
